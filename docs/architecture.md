@@ -4,9 +4,9 @@
 
 
 $host = 'localhost';
-$db = 'coddarco_coddar';
-$user = 'coddarco_developer';
-$pass = 'w[]f5wCTCh_NmPW5';
+$db = 'coddarco_life';
+$user = 'coddarco_life';
+$pass = 'xN.O.&KBbRz?';
 
 DESCRIBE empresa;
 

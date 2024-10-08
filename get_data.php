@@ -1,24 +1,45 @@
 <?php
-$host = 'localhost';
-$db = 'coddarco_coddar';
-$user = 'coddarco_developer';
-$pass = 'w[]f5wCTCh_NmPW5';
+require_once 'config.php';
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ];
+    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
 
-    // Buscar informações da empresa (uma única empresa)
-    $stmt = $pdo->query("SELECT nome, cnpj, endereco, telefone, email, website FROM empresa LIMIT 1");
-    $empresa = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Buscar informações da empresa
+    $stmt = $pdo->query("SELECT id, nome, endereco, telefone, email, website, cnpj, inscricao_estadual FROM empresa LIMIT 1");
+    $empresa = $stmt->fetch();
 
     // Buscar clientes
-    $stmt = $pdo->query("SELECT id, nome, documento, endereco, telefone, email FROM clientes");
-    $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query("SELECT id, tipo, nome, cpf, cnpj, endereco, telefone, email FROM clientes");
+    $clientes = $stmt->fetchAll();
 
-    echo json_encode(['empresa' => $empresa, 'clientes' => $clientes]);
+    // Buscar serviços
+    $stmt = $pdo->query("SELECT id, descricao, preco, categoria FROM servicos");
+    $servicos = $stmt->fetchAll();
+
+    echo json_encode([
+        'empresa' => $empresa,
+        'clientes' => $clientes,
+        'servicos' => $servicos
+    ]);
 
 } catch (PDOException $e) {
-    echo json_encode(['error' => 'Erro: ' . $e->getMessage()]);
+    error_log('Erro de banco de dados: ' . $e->getMessage());
+    echo json_encode([
+        'error' => 'Erro ao acessar o banco de dados. Por favor, contate o administrador.',
+        'debug_info' => [
+            'message' => $e->getMessage(),
+            'code' => $e->getCode()
+        ]
+    ]);
+    exit;
 }
 ?>

@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]
+</IfModule>
+
+# Prevenir listagem de diretórios
+Options -Indexes
+
+# Definir página de índice padrão
+DirectoryIndex index.php index.html
+
+# Definir fuso horário do PHP
+php_value date.timezone "America/Sao_Paulo"
+
+
+
