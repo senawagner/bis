@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Faturas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Preencher Proposta de Serviços</h2>
+
+        <!-- Seção de Informações da Empresa (fixa) -->
+        <div id="empresaInfo" class="mb-4">
+            <h4>Informações da Empresa</h4>
+            <p><strong>Nome:</strong> <span id="empresaNome"></span></p>
+            <p><strong>CNPJ:</strong> <span id="empresaCNPJ"></span></p>
+            <p><strong>Endereço:</strong> <span id="empresaEndereco"></span></p>
+            <p><strong>Telefone:</strong> <span id="empresaTelefone"></span></p>
+            <p><strong>Email:</strong> <span id="empresaEmail"></span></p>
+        </div>
+
+        <!-- Seção de Seleção de Cliente -->
+        <form id="propostaForm">
+            <div class="form-group">
+                <label for="clienteSelect">Selecione o Cliente</label>
+                <select class="form-control" id="clienteSelect">
+                    <!-- Opções preenchidas dinamicamente -->
+                </select>
+            </div>
+
+            <!-- Seção de Informações do Cliente -->
+            <div id="clienteInfo" class="mb-4">
+                <h4>Informações do Cliente</h4>
+                <p><strong>Nome:</strong> <span id="clienteNome"></span></p>
+                <p><strong>CPF/CNPJ:</strong> <span id="clienteDocumento"></span></p>
+                <p><strong>Endereço:</strong> <span id="clienteEndereco"></span></p>
+                <p><strong>Telefone:</strong> <span id="clienteTelefone"></span></p>
+                <p><strong>Email:</strong> <span id="clienteEmail"></span></p>
+            </div>
+
+            <!-- Seção de Serviços -->
+            <div id="servicosContainer">
+                <h4>Serviços a serem faturados</h4>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" id="addServico">Adicionar Serviço</button>
+                </div>
+                <div id="servicosList">
+                    <!-- Linhas de serviço adicionadas dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Sub-total -->
+            <div class="form-group">
+                <label for="subTotal">Sub-total</label>
+                <input type="text" class="form-control" id="subTotal" readonly>
+            </div>
+
+            <!-- Desconto -->
+            <div class="form-group">
+                <label for="desconto">Desconto</label>
+                <select class="form-control" id="desconto">
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="10">10%</option>
+                    <option value="15">15%</option>
+                    <option value="20">20%</option>
+                    <option value="25">25%</option>
+                    <option value="30">30%</option>
+                    <option value="35">35%</option>
+                    <option value="40">40%</option>
+                    <option value="45">45%</option>
+                    <option value="50">50%</option>
+                </select>
+            </div>
+
+            <!-- Total -->
+            <div class="form-group">
+                <label for="total">Total</label>
+                <input type="text" class="form-control" id="total" readonly>
+            </div>
+
+            <!-- Botão para finalizar -->
+            <button type="button" class="btn btn-primary" onclick="finalizarProposta()">Finalizar Proposta</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>
